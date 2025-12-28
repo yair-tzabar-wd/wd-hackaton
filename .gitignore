@@ -2,7 +2,15 @@
 __pycache__/
 *.py[cod]
 *$py.class
+# Environment variables
+.env
+.env.local
+.env.*.local
 
+# Credentials
+*.pem
+*.key
+secrets/
 # Virtual environments
 venv/
 env/

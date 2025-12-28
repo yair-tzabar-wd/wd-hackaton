@@ -1,11 +1,26 @@
 import os
+from dotenv import load_dotenv
 
-os.environ['HIREDSCORE_CELL'] = "0000"
-os.environ['SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_ENABLED_PREPROD_0000'] = "true"
-os.environ['SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_HOST_PREPROD_0000'] = "preprod-0000-applicative-pl-0.jfiwu5.mongodb.net"
-os.environ['SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_USERNAME_PREPROD_0000'] = "yairtzabar_apono-preprod-0000-applicative"
-os.environ['SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_PASSWORD_PREPROD_0000'] = "5l;^QuS4&7*fUrV1"
+# Load environment variables from .env file
+load_dotenv()
 
+# Verify required env variables are set
+required_env_vars = [
+    'HIREDSCORE_CELL',
+    'SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_ENABLED_PREPROD_0000',
+    'SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_HOST_PREPROD_0000',
+    'SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_USERNAME_PREPROD_0000',
+    'SD_MONGODB_ATLAS_HIREDSCORE_APPLICATIVE_SECRET_PASSWORD_PREPROD_0000',
+]
+
+for var in required_env_vars:
+    if not os.getenv(var):
+        raise EnvironmentError(f"Required environment variable '{var}' is not set. Please check your .env file.")
+
+import logging
+from typing import Optional, Dict, Any
+
+# ... rest of your code stays the same ...
 import logging
 from typing import Optional, Dict, Any
 
