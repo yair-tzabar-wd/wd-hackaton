@@ -16,6 +16,7 @@ pymongo>=4.0.0
 # Utilities
 python-dateutil>=2.8.0
 tqdm>=4.60.0  # For progress bars
+joblib>=1.2.0  # For model serialization
 
 # Data Serialization
 pyarrow>=10.0.0  # For parquet support
