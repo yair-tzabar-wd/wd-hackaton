@@ -46,6 +46,7 @@ from io_utils import (
 )
 from baselines import fit_baselines, predict_baselines
 from metrics import compute_all_metrics, compute_segment_metrics, flatten_metrics
+from report_generator import generate_html_report
 
 # Configure logging
 logging.basicConfig(
@@ -530,6 +531,22 @@ def run_pipeline(args: argparse.Namespace) -> Dict:
     with open(out_dir / "report.md", "w") as f:
         f.write(report)
     logger.info(f"Saved report: {out_dir}/report.md")
+    
+    # HTML report (presentation-ready)
+    baseline_rules = {
+        "segment_median": "median(eventual_total_applicants) per segment -> y_pred = max(0, median - current)",
+        "heuristic": heur_baseline.get_rule_description()
+    }
+    html_report = generate_html_report(
+        config=config,
+        sanity=sanity,
+        overall_metrics=overall_metrics,
+        out_dir=out_dir,
+        baseline_rules=baseline_rules
+    )
+    with open(out_dir / "report.html", "w") as f:
+        f.write(html_report)
+    logger.info(f"Saved HTML report: {out_dir}/report.html")
     
     # 10. Optional plots
     if args.generate_plots:
